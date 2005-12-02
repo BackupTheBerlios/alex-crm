@@ -1,0 +1,115 @@
+# Gambas Form File 1.0
+
+{ kd_ap_neu Form
+  MoveScaled(26.4,7.6,57.9,42)
+  'Move(264,76,579,420)
+  Text = ("")
+  Maximized = True
+  { Button1 Button
+    MoveScaled(2,36,18,2.9)
+    'Move(20,360,180,29)
+    Text = ("Abbrechen")
+  }
+  { Label1 Label
+    MoveScaled(2,2,82,3)
+    'Move(20,20,820,30)
+    Font = Font["Andale Mono,Bold,+1"]
+    Text = ("Neuen Ansprechpartner hinzufügen!")
+    Border = Border.Etched
+  }
+  { TextBox1 TextBox
+    MoveScaled(16,8,31,2)
+    'Move(160,80,310,20)
+    Text = ("")
+  }
+  { TextBox2 TextBox
+    MoveScaled(16,11,31,2)
+    'Move(160,110,310,20)
+    Text = ("")
+  }
+  { TextBox3 TextBox
+    MoveScaled(16,14,31,2)
+    'Move(160,140,310,20)
+    Text = ("")
+  }
+  { TextBox5 TextBox
+    MoveScaled(16,20,31,2)
+    'Move(160,200,310,20)
+    Text = ("")
+  }
+  { TextBox7 TextBox
+    MoveScaled(16,26,31,2)
+    'Move(160,260,310,20)
+    Text = ("")
+  }
+  { TextBox4 TextBox
+    MoveScaled(16,17,31,2)
+    'Move(160,170,310,20)
+    Text = ("")
+  }
+  { TextBox8 TextBox
+    MoveScaled(16,29,31,2)
+    'Move(160,290,310,20)
+    Text = ("")
+  }
+  { Label14 Label
+    MoveScaled(2,29,12,2)
+    'Move(20,290,120,20)
+    Text = ("Mobil")
+  }
+  { Label13 Label
+    MoveScaled(2,26,12,2)
+    'Move(20,260,120,20)
+    Text = ("email")
+  }
+  { Label12 Label
+    MoveScaled(2,20,12,2)
+    'Move(20,200,120,20)
+    Text = ("Abteilung")
+  }
+  { Label11 Label
+    MoveScaled(2,17,12,2)
+    'Move(20,170,120,20)
+    Text = ("Position")
+  }
+  { Label10 Label
+    MoveScaled(2,14,12,2)
+    'Move(20,140,120,20)
+    Text = ("Name")
+  }
+  { Label9 Label
+    MoveScaled(2,11,12,2)
+    'Move(20,110,120,20)
+    Text = ("Vorname")
+  }
+  { Label8 Label
+    MoveScaled(2,8,12,2)
+    'Move(20,80,120,20)
+    Text = ("Titel")
+  }
+  { Button2 Button
+    MoveScaled(23,36,18,2.9)
+    'Move(230,360,180,29)
+    Text = ("speichern")
+  }
+  { Label5 Label
+    MoveScaled(2,32,12,2)
+    'Move(20,320,120,20)
+    Text = ("Kommentar")
+  }
+  { TextBox9 TextBox
+    MoveScaled(16,32,31,2)
+    'Move(160,320,310,20)
+    Text = ("")
+  }
+  { TextBox6 TextBox
+    MoveScaled(16,23,31,2)
+    'Move(160,230,310,20)
+    Text = ("")
+  }
+  { Label2 Label
+    MoveScaled(2,23,12,2)
+    'Move(20,230,120,20)
+    Text = ("Telefon")
+  }
+}

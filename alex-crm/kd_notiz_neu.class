@@ -1,0 +1,42 @@
+kunden AS NEW Main
+notizen AS NEW Main
+
+PRIVATE nummer AS Integer
+PRIVATE res AS Integer
+PRIVATE kdnr AS Integer
+PRIVATE sql_handle AS result
+PRIVATE notiz_handle AS result
+
+PUBLIC SUB Form_Open()
+    kdnr = kundenliste.kunde
+    sql_handle = kunden.sql_query("select * from tab_kunden where kd_nr=" & kdnr)
+    notiz_handle = notizen.sql_query("select * from tab_kd_notizen where kd_nr=" & kdnr & " order by kd_nr ")
+    textbox1.text = sql_handle!kd_name & " " & sql_handle!kd_name_zusatz
+    nummer = kdnr
+END
+
+PUBLIC SUB Button1_Click()
+  DIM sql_insert AS Result
+  DIM sql_update AS Result
+  IF NOT textbox4.text OR NOT textarea1.text THEN
+    message("Die Felder dürfen nicht leer sein!")
+  ELSE
+    'sql_insert = main.sql_query("insert into tab_kd_notizen (kd_nr,gespr_partner,notiz,datum,time) values (" & nummer & ",\"" & textbox4.text & "\",\"" & textarea1.text & "\",CURRENT_DATE,CURRENT_TIME)")
+    ''sql_update = main.sql_query("update tab_akquise set ak_status=\"" & combobox1.text & "\" where ak_nr=" & nummer)
+    kundenliste.kd_notiz(nummer, textbox4.text, textarea1.text)
+    kundenliste.Show
+    ME.Close
+  END IF
+END
+
+PUBLIC SUB Button2_Click()
+  kundenliste.Show
+  ME.Close
+END
+
+PUBLIC SUB Button3_Click()
+' Infofax versenden
+'DIM faxstatus_sql AS Result
+'faxstatus_sql = main.sql_query("select * from tab_akquise where ak_nr=" & nummer)
+'message("fax wurde in die Warteschlange gestellt für Kunde:\n" & faxstatus_sql!ak_nr & "\n" & faxstatus_sql!ak_name & "\n" & faxstatus_sql!ak_faxnummer)
+END

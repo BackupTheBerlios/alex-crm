@@ -1,0 +1,418 @@
+# Gambas Form File 1.0
+
+{ dokneu Form
+  MoveScaled(18,0.2,78,69.9)
+  'Move(180,2,780,699)
+  Text = ("")
+  Border = Window.Fixed
+  Maximized = True
+  { Frame5 Frame
+    MoveScaled(1,26,71,22)
+    'Move(10,260,710,220)
+    Text = ("Mahnung")
+    { TextBox21 TextBox
+      MoveScaled(29,4,9,2)
+      'Move(290,40,90,20)
+      Text = ("")
+    }
+    { TextBox24 TextBox
+      MoveScaled(11,4,9,2)
+      'Move(110,40,90,20)
+      Text = ("")
+    }
+    { Label27 Label
+      MoveScaled(1,4,8,2)
+      'Move(10,40,80,20)
+      Text = ("MahnungsNr.")
+    }
+    { Label30 Label
+      MoveScaled(21,4,6,2)
+      'Move(210,40,60,20)
+      Text = ("Datum:")
+    }
+    { Label31 Label
+      MoveScaled(39,4,12,2)
+      'Move(390,40,120,20)
+      Text = ("(Jahr / Monat / Tag)")
+    }
+    { Label32 Label
+      MoveScaled(21,7,7,2)
+      'Move(210,70,70,20)
+      Text = ("Fristdatum:")
+    }
+    { TextBox25 TextBox
+      MoveScaled(29,7,9,2)
+      'Move(290,70,90,20)
+      Text = ("")
+    }
+    { Label33 Label
+      MoveScaled(23,9,13,2)
+      'Move(230,90,130,20)
+      Text = ("ODER Zahlungsziel:")
+    }
+    { TextBox26 TextBox
+      MoveScaled(29,11,9,2)
+      'Move(290,110,90,20)
+      Text = ("")
+    }
+  }
+  { Frame4 Frame
+    MoveScaled(1,26,71,22)
+    'Move(10,260,710,220)
+    Text = ("Sonstiges Dokument")
+    { TextBox22 TextBox
+      MoveScaled(11,5,58,2)
+      'Move(110,50,580,20)
+      Text = ("")
+    }
+    { Label28 Label
+      MoveScaled(1,5,9,2)
+      'Move(10,50,90,20)
+      Text = ("Inhalt:")
+    }
+  }
+  { Frame2 Frame
+    MoveScaled(1,26,71,22)
+    'Move(10,260,710,220)
+    Text = ("Rechnungsdetails")
+    { TextBox9 TextBox
+      MoveScaled(11,2,9,2)
+      'Move(110,20,90,20)
+      Text = ("")
+    }
+    { Label14 Label
+      MoveScaled(1,2,5,2)
+      'Move(10,20,50,20)
+      Text = ("RgNr.:")
+    }
+    { TextBox10 TextBox
+      MoveScaled(11,4,9,2)
+      'Move(110,40,90,20)
+      Text = ("")
+    }
+    { Label15 Label
+      MoveScaled(1,4,9,2)
+      'Move(10,40,90,20)
+      Text = ("Anzahl Posten:")
+    }
+    { TextBox11 TextBox
+      MoveScaled(22,7,11,2)
+      'Move(220,70,110,20)
+      Text = ("0")
+      Alignment = Align.Right
+    }
+    { Label16 Label
+      MoveScaled(1,7,21,2)
+      'Move(10,70,210,20)
+      Text = ("Summe netto MwSt-Satz A (16%): ")
+    }
+    { TextBox13 TextBox
+      MoveScaled(22,14,11,2)
+      'Move(220,140,110,20)
+      Text = ("0")
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Label18 Label
+      MoveScaled(1,14,13,2)
+      'Move(10,140,130,20)
+      Text = ("gesamtsumme netto:")
+    }
+    { Label17 Label
+      MoveScaled(1,9,21,2)
+      'Move(10,90,210,20)
+      Text = ("Summe netto MwSt-Satz B (07%): ")
+    }
+    { TextBox12 TextBox
+      MoveScaled(22,9,11,2)
+      'Move(220,90,110,20)
+      Text = ("0")
+      Alignment = Align.Right
+    }
+    { TextBox15 TextBox
+      MoveScaled(52,7,16,2)
+      'Move(520,70,160,20)
+      Text = ("0")
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { TextBox16 TextBox
+      MoveScaled(52,9,16,2)
+      'Move(520,90,160,20)
+      Text = ("0")
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Label20 Label
+      MoveScaled(34,9,17,2)
+      'Move(340,90,170,20)
+      Text = ("Summe MwSt Satz B (07%): ")
+    }
+    { Label21 Label
+      MoveScaled(34,7,17,2)
+      'Move(340,70,170,20)
+      Text = ("Summe MwSt Satz A (16%): ")
+    }
+    { Label22 Label
+      MoveScaled(34,14,14,2)
+      'Move(340,140,140,20)
+      Text = ("gesamtsumme MwSt.:")
+    }
+    { TextBox17 TextBox
+      MoveScaled(52,14,16,2)
+      'Move(520,140,160,20)
+      Text = ("0")
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { TextBox18 TextBox
+      MoveScaled(29,2,9,2)
+      'Move(290,20,90,20)
+      Text = ("")
+    }
+    { Label23 Label
+      MoveScaled(22,2,6,2)
+      'Move(220,20,60,20)
+      Text = ("RgDatum:")
+    }
+    { Label19 Label
+      MoveScaled(1,16,13,2)
+      'Move(10,160,130,20)
+      Text = ("gesamtsumme brutto:")
+    }
+    { TextBox14 TextBox
+      MoveScaled(22,16,11,2)
+      'Move(220,160,110,20)
+      Text = ("0")
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Label6 Label
+      MoveScaled(1,11,21,2)
+      'Move(10,110,210,20)
+      Text = ("Summe netto MwSt-Satz C (00%): ")
+    }
+    { TextBox1 TextBox
+      MoveScaled(22,11,11,2)
+      'Move(220,110,110,20)
+      Text = ("0")
+      Alignment = Align.Right
+    }
+    { Label7 Label
+      MoveScaled(34,11,17,2)
+      'Move(340,110,170,20)
+      Text = ("Summe MwSt Satz C (00%): ")
+    }
+    { TextBox2 TextBox
+      MoveScaled(52,11,16,2)
+      'Move(520,110,160,20)
+      Text = ("0")
+      Alignment = Align.Right
+      ReadOnly = True
+    }
+    { Label13 Label
+      MoveScaled(39,2,12,2)
+      'Move(390,20,120,20)
+      Text = ("(Jahr / Monat / Tag)")
+    }
+    { Label24 Label
+      MoveScaled(22,4,6,2)
+      'Move(220,40,60,20)
+      Text = ("Fällig:")
+    }
+    { TextBox19 TextBox
+      MoveScaled(29,4,9,2)
+      'Move(290,40,90,20)
+      Text = ("")
+    }
+    { Label25 Label
+      MoveScaled(39,4,13,2)
+      'Move(390,40,130,20)
+      Text = ("ODER Zahlungsziel:")
+    }
+    { Label26 Label
+      MoveScaled(34,19,9,2)
+      'Move(340,190,90,20)
+      Text = ("Sofort bezahlt:")
+    }
+    { ComboBox2 ComboBox
+      MoveScaled(52,18,15,3)
+      'Move(520,180,150,30)
+      Text = (" ")
+      ReadOnly = True
+      List = ("Nein\nJa")
+    }
+    { TextBox20 TextBox
+      MoveScaled(52,4,9,2)
+      'Move(520,40,90,20)
+      Text = ("")
+    }
+  }
+  { TextBox23 TextBox
+    MoveScaled(45,23,27,2)
+    'Move(450,230,270,20)
+    Text = ("")
+  }
+  { Label29 Label
+    MoveScaled(37,23,7,2)
+    'Move(370,230,70,20)
+    Text = ("Ablageort:")
+  }
+  { Frame1 Frame
+    MoveScaled(1,48,71,8)
+    'Move(10,480,710,80)
+    Text = ("Datei hochladen")
+    { Button4 Button
+      MoveScaled(14,2,16,2)
+      'Move(140,20,160,20)
+      Text = ("Pfad setzen")
+    }
+    { TextBox8 TextBox
+      MoveScaled(14,5,43,2)
+      'Move(140,50,430,20)
+      Text = ("")
+      ReadOnly = True
+    }
+    { Label5 Label
+      MoveScaled(1,5,13,2)
+      'Move(10,50,130,20)
+      Text = ("Pfad:")
+    }
+    { Button2 Button
+      MoveScaled(47,2,10,2)
+      'Move(470,20,100,20)
+      Text = ("hinzufügen")
+    }
+  }
+  { Label12 Label
+    MoveScaled(1,23,13,2)
+    'Move(10,230,130,20)
+    Text = ("Stichwort f. Suche:")
+  }
+  { TextBox7 TextBox
+    MoveScaled(15,23,19,2)
+    'Move(150,230,190,20)
+    Text = ("")
+  }
+  { Label11 Label
+    MoveScaled(1,20,13,2)
+    'Move(10,200,130,20)
+    Text = ("Kommentar:")
+  }
+  { TextBox6 TextBox
+    MoveScaled(15,20,42,2)
+    'Move(150,200,420,20)
+    Text = ("")
+  }
+  { Label10 Label
+    MoveScaled(1,18,13,2)
+    'Move(10,180,130,20)
+    Text = ("Betreff:")
+  }
+  { TextBox5 TextBox
+    MoveScaled(15,18,42,2)
+    'Move(150,180,420,20)
+    Text = ("")
+  }
+  { Label4 Label
+    MoveScaled(26,15,3,2)
+    'Move(260,150,30,20)
+    Text = ("Art:")
+  }
+  { ComboBox4 ComboBox
+    MoveScaled(30,14,16.8,2.4)
+    'Move(300,140,168,24)
+    Text = (" ")
+    ReadOnly = True
+    List = ("Rechnung\nBesuchsbericht\nBriefkopf\nBrief\nMahnung\nAngebot\nAngebotsbestätigung\nReklamation\nSonstiges")
+  }
+  { Label3 Label
+    MoveScaled(1,15,6,2)
+    'Move(10,150,60,20)
+    Text = ("Richtung")
+  }
+  { ComboBox3 ComboBox
+    MoveScaled(8,14,16.8,1.6)
+    'Move(80,140,168,16)
+    Text = (" ")
+    ReadOnly = True
+    List = ("eingehend\nausgehend")
+  }
+  { Label2 Label
+    MoveScaled(1,11,14,2)
+    'Move(10,110,140,20)
+    Text = ("ausgewählter Kontakt:")
+  }
+  { TextBox4 TextBox
+    MoveScaled(62,11,7,2)
+    'Move(620,110,70,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label8 Label
+    MoveScaled(52,11,9,2)
+    'Move(520,110,90,20)
+    Text = ("Kontakt ID:")
+  }
+  { TextBox3 TextBox
+    MoveScaled(15,11,36,2)
+    'Move(150,110,360,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label1 Label
+    MoveScaled(1,5,13,2)
+    'Move(10,50,130,20)
+    Text = ("Kontakt:")
+  }
+  { ColumnView1 ColumnView
+    MoveScaled(1,7,70,3)
+    'Move(10,70,700,30)
+    Sorted = True
+  }
+  { Label9 Label
+    MoveScaled(40,4,13,2)
+    'Move(400,40,130,20)
+    Text = ("Anzeigen:")
+  }
+  { ComboBox1 ComboBox
+    MoveScaled(54,3,16.8,2.4)
+    'Move(540,30,168,24)
+    Text = (" ")
+    ReadOnly = True
+    List = ("alle\nLieferanten\nKunden")
+  }
+  { Frame3 Frame
+    MoveScaled(1,57,47,6)
+    'Move(10,570,470,60)
+    Text = ("ODER:")
+    { Button1 Button
+      MoveScaled(5,2,14,2)
+      'Move(50,20,140,20)
+      Text = ("Scannen")
+    }
+    { ComboBox5 ComboBox
+      MoveScaled(30,2,15,2)
+      'Move(300,20,150,20)
+      Text = (" ")
+      ReadOnly = True
+      List = ("A4\nA5 hochformat")
+    }
+    { TextBox27 TextBox
+      MoveScaled(21,2,3,2)
+      'Move(210,20,30,20)
+      Text = ("1")
+      Alignment = Align.Right
+    }
+    { Label34 Label
+      MoveScaled(25,2,5,2)
+      'Move(250,20,50,20)
+      Text = ("Seite(n)")
+    }
+  }
+  { Button3 Button
+    MoveScaled(62,59,10,2)
+    'Move(620,590,100,20)
+    Text = ("abbrechen")
+  }
+}

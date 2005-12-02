@@ -1,0 +1,69 @@
+# Gambas Form File 1.0
+
+{ kd_notiz_neu Form
+  MoveScaled(18.5455,18.6364,73.5455,30)
+  'Move(204,205,809,330)
+  Text = ("")
+  Border = Window.Fixed
+  { Label1 Label
+    MoveScaled(2,1,12,3)
+    'Move(22,11,132,33)
+    Font = Font["Andale Mono,Bold,+1"]
+    Text = ("Kontakt:")
+    Border = Border.Etched
+  }
+  { TextBox1 TextBox
+    MoveScaled(15,1,56.7273,2.9091)
+    'Move(165,11,624,32)
+    Font = Font["Andale Mono,+1"]
+    Text = ("")
+    ReadOnly = True
+  }
+  { Button1 Button
+    MoveScaled(37,26,15,2.9091)
+    'Move(407,286,165,32)
+    Text = ("speichern")
+  }
+  { Label5 Label
+    MoveScaled(2,7,12,2)
+    'Move(22,77,132,22)
+    Text = ("Gesprächspartner")
+  }
+  { TextBox4 TextBox
+    MoveScaled(2,9,26,3)
+    'Move(22,99,286,33)
+    Text = ("")
+  }
+  { Label6 Label
+    MoveScaled(2,14,9,2)
+    'Move(22,154,99,22)
+    Text = ("Inhalt:")
+  }
+  { TextArea1 TextArea
+    MoveScaled(2,16,50,7)
+    'Move(22,176,550,77)
+    Text = ("")
+  }
+  { ComboBox1 ComboBox
+    MoveScaled(2,26,21,3)
+    'Move(22,286,231,33)
+    Text = (" ")
+    ReadOnly = True
+    List = ("Offen\nkein Interesse, freundlich\nkein Interesse, unfreundlich\nwieder anrufen\nTermin wurde vereinbart")
+  }
+  { Label2 Label
+    MoveScaled(2,24,9,2)
+    'Move(22,264,99,22)
+    Text = ("Ergebnis:")
+  }
+  { Button2 Button
+    MoveScaled(54,26,15,2.9091)
+    'Move(594,286,165,32)
+    Text = ("abbrechen")
+  }
+  { Button3 Button
+    MoveScaled(57,10,11,8)
+    'Move(627,110,121,88)
+    Text = ("Button3")
+  }
+}

@@ -1,0 +1,92 @@
+# Gambas Form File 1.0
+
+{ akview Form
+  MoveScaled(15,20.1818,73.5455,55.9091)
+  'Move(165,222,809,615)
+  Text = ("")
+  Maximized = True
+  { Button1 Button
+    MoveScaled(53,50,18,2.9091)
+    'Move(583,550,198,32)
+    Text = ("Schliessen")
+  }
+  { TextBox1 TextBox
+    MoveScaled(15,1,56.7273,2.9091)
+    'Move(165,11,624,32)
+    Font = Font["Andale Mono,+1"]
+    Text = ("")
+  }
+  { Label1 Label
+    MoveScaled(2,1,12,3)
+    'Move(22,11,132,33)
+    Font = Font["Andale Mono,Bold,+1"]
+    Text = ("Kontakt:")
+    Border = Border.Etched
+  }
+  { ColumnView1 ColumnView
+    MoveScaled(2,5,69.8182,16.7273)
+    'Move(22,55,768,184)
+    ScrollBar = Scroll.Vertical
+  }
+  { Button3 Button
+    MoveScaled(2,50,15,2.9091)
+    'Move(22,550,165,32)
+    Text = ("neu")
+  }
+  { Label2 Label
+    MoveScaled(2,24,12,2)
+    'Move(22,264,132,22)
+    Text = ("Details:")
+    Border = Border.Etched
+  }
+  { TextBox2 TextBox
+    MoveScaled(2,28,10,3)
+    'Move(22,308,110,33)
+    Text = ("")
+  }
+  { TextBox3 TextBox
+    MoveScaled(14,28,10,3)
+    'Move(154,308,110,33)
+    Text = ("")
+  }
+  { TextBox4 TextBox
+    MoveScaled(26,28,26,3)
+    'Move(286,308,286,33)
+    Text = ("")
+  }
+  { Label3 Label
+    MoveScaled(2,26,9,2)
+    'Move(22,286,99,22)
+    Text = ("Datum")
+  }
+  { Label4 Label
+    MoveScaled(14,26,9,2)
+    'Move(154,286,99,22)
+    Text = ("Uhrzeit")
+  }
+  { Label5 Label
+    MoveScaled(26,26,12,2)
+    'Move(286,286,132,22)
+    Text = ("Gesprächspartner")
+  }
+  { Label6 Label
+    MoveScaled(2,31,9,2)
+    'Move(22,341,99,22)
+    Text = ("Inhalt:")
+  }
+  { TextArea1 TextArea
+    MoveScaled(2,33,50,7)
+    'Move(22,363,550,77)
+    Text = ("")
+  }
+  { TextBox5 TextBox
+    MoveScaled(2,42,19,3)
+    'Move(22,462,209,33)
+    Text = ("")
+  }
+  { Label7 Label
+    MoveScaled(2,40,9,2)
+    'Move(22,440,99,22)
+    Text = ("Status:")
+  }
+}

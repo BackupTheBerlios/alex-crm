@@ -1,0 +1,29 @@
+apeinfuegen AS NEW Main
+
+PRIVATE kdnr AS Integer
+
+PUBLIC SUB Form_Open()
+kdnr = kundenliste.kunde
+END
+
+PUBLIC SUB Button1_Click()
+ kd_ap_neu.Close
+ kundenliste.Show
+END
+
+PUBLIC SUB Button2_Click()
+  DIM res AS Result
+
+  IF NOT (textbox3.Text = "") THEN
+
+  res = apeinfuegen.sql_query("insert into kd_ansprechpartner (kdnr, titel, vorname,name,position,abteilung,telefon,mail,mobil,kommentar) values(" & kdnr & ", \"" & textbox1.text & "\", \"" & textbox2.text & "\", \"" & textbox3.text & "\", \"" & textbox4.text & "\", \"" & textbox5.text & "\", \"" & textbox6.text & "\", \"" & textbox7.text & "\", \"" & textbox8.text & "\", \"" & textbox9.text & "\" )")
+  kundenliste.form_open
+  kundenliste.columnview1_click
+  kd_ap_neu.Close
+  kundenliste.Show
+  ELSE
+  message("Name darf nicht leer sein")
+  END IF
+
+
+END

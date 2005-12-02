@@ -1,0 +1,88 @@
+PRIVATE sql_handle AS Result
+PRIVATE kunde AS NEW Main
+PRIVATE ok AS Boolean = TRUE
+dokument AS NEW Main
+
+PUBLIC SUB Form_Open()
+  ColumnView1_leave
+  grid_fill()
+END
+
+PRIVATE SUB grid_fill()
+  DIM query AS String
+  DIM i AS Integer
+  columnview1.Clear
+  query = "select * from tab_kunden "
+  IF combobox1.Text = "Kunden" THEN query = query & " where kontaktgruppe=1"
+  IF combobox1.Text = "Lieferanten" THEN query = query & " where kontaktgruppe=2"
+  query = query & " order by kd_name"
+  sql_handle = kunde.sql_query(query)
+  Columnview1.Columns.Count = 7
+  Columnview1.Columns[0].Text = "Nr."
+  Columnview1.Columns[0].width = 1
+  Columnview1.Columns[1].Text = "Name"
+  Columnview1.Columns[2].Text = "Zusatz"
+  Columnview1.Columns[3].Text = "Strasse/Nr."
+  Columnview1.Columns[4].Text = "PLZ"
+  Columnview1.Columns[5].Text = "Ort"
+  Columnview1.Columns[6].Text = "Liefert"
+  i = 0
+  FOR EACH sql_handle
+    ColumnView1.Add(i, sql_handle!kd_nr)
+    Columnview1[i][1] = sql_handle!kd_name
+    Columnview1[i][2] = sql_handle!kd_name_zusatz
+    Columnview1[i][3] = sql_handle!kd_strasse & " " & sql_handle!kd_hausnr
+    Columnview1[i][4] = sql_handle!kd_plz
+    Columnview1[i][5] = sql_handle!kd_ort
+    Columnview1[i][6] = sql_handle!liefert
+    i = i + 1
+  NEXT
+END
+
+PUBLIC SUB ColumnView1_Click()
+  textbox3.Text = ColumnView1[columnview1.key][1] & " " & ColumnView1[columnview1.key][2]
+  textbox4.Text = ColumnView1[columnview1.key][0]
+END
+
+PUBLIC SUB ColumnView1_Enter()
+ columnview1.Move(11, 77, 770, 253)
+END
+PUBLIC SUB ColumnView1_leave()
+ columnview1.move(11, 77, 770, 31)
+END
+
+PUBLIC SUB Button1_Click()
+  scannen
+  ME.close
+END
+
+PUBLIC SUB scannen()
+  DIM maxkey AS Result
+  DIM max_dok AS result
+  DIM scanbefehl AS String
+  DIM neu_dok AS Integer
+  DIM test AS String
+  DIM scanformat AS String
+  DIM i AS Integer
+ ' einfuegen()
+
+  max_dok = kunde.sql_query("select max(dok_id) as maxdok from dok_index")
+  neu_dok = max_dok!maxdok
+  scanbefehl = "scanimage -d microtek2:/dev/sg0 --format tiff --resolution 300 --mode gray -l 0 -t 0  "
+  IF combobox5.Text = "A4" THEN scanformat = " -x 210 -y 297 "
+  IF combobox5.Text = "A5 hochformat" THEN scanformat = " -x 149 -y 210 "
+
+  FOR i = 1 TO textbox1.Text STEP 1
+    IF textbox1.Text > "1" THEN
+      message("Bitte Seite " & i & " einlegen!")
+    END IF
+    SHELL scanbefehl & scanformat & " > /daten/wws/scans/" & textbox4.Text & "." & neu_dok & "-" & i & ".tiff" WAIT
+    SHELL "convert /daten/wws/scans/" & textbox4.Text & "." & neu_dok & "-" & i & ".tiff /daten/wws/scans/" & textbox4.Text & "." & neu_dok & "-" & i & ".jpeg" WAIT
+    SHELL "rm /daten/wws/scans/" & textbox4.Text & "." & neu_dok & "-" & i & ".tiff"
+  NEXT
+  main.sql_query("update dok_index set dateiname=\"" & textbox4.Text & "." & neu_dok & "\" where dok_id=" & neu_dok)
+END
+
+PUBLIC SUB ComboBox1_click()
+  grid_fill
+END

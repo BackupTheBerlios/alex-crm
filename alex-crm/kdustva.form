@@ -1,0 +1,414 @@
+# Gambas Form File 1.0
+
+{ kdustva Form
+  MoveScaled(17.5,0,74.1,53.8)
+  'Move(175,0,741,538)
+  Text = ("")
+  Border = Window.Fixed
+  { TextLabel1 TextLabel
+    MoveScaled(5,7,4,2)
+    'Move(50,70,40,20)
+    Text = ("Monat")
+  }
+  { TextLabel2 TextLabel
+    MoveScaled(18,7,4,2)
+    'Move(180,70,40,20)
+    Text = ("Jahr")
+  }
+  { Label1 Label
+    MoveScaled(5,2,12,2)
+    'Move(50,20,120,20)
+    Text = ("UstVA-Auswertung")
+  }
+  { TextBox3 TextBox
+    MoveScaled(7,21,7,2)
+    'Move(70,210,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox4 TextBox
+    MoveScaled(7,23,7,2)
+    'Move(70,230,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox5 TextBox
+    MoveScaled(7,25,7,2)
+    'Move(70,250,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox6 TextBox
+    MoveScaled(15,21,7,2)
+    'Move(150,210,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox7 TextBox
+    MoveScaled(15,23,7,2)
+    'Move(150,230,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox8 TextBox
+    MoveScaled(15,25,7,2)
+    'Move(150,250,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox9 TextBox
+    MoveScaled(7,29,7,2)
+    'Move(70,290,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox10 TextBox
+    MoveScaled(15,29,7,2)
+    'Move(150,290,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { Button2 Button
+    MoveScaled(3,50,11,3)
+    'Move(30,500,110,30)
+    Text = ("schliessen")
+  }
+  { Label2 Label
+    MoveScaled(2,16,8,2)
+    'Move(20,160,80,20)
+    Text = ("Einnahmen")
+  }
+  { Label3 Label
+    MoveScaled(2,29,5,2)
+    'Move(20,290,50,20)
+    Text = ("Summe")
+  }
+  { Label4 Label
+    MoveScaled(2,25,4,2)
+    'Move(20,250,40,20)
+    Text = ("00%")
+  }
+  { Label5 Label
+    MoveScaled(2,23,4,2)
+    'Move(20,230,40,20)
+    Text = ("07%")
+  }
+  { Label6 Label
+    MoveScaled(2,21,4,2)
+    'Move(20,210,40,20)
+    Text = ("16%")
+  }
+  { Label7 Label
+    MoveScaled(15,19,5,2)
+    'Move(150,190,50,20)
+    Text = ("MwSt.")
+  }
+  { Label8 Label
+    MoveScaled(7,19,8,2)
+    'Move(70,190,80,20)
+    Text = ("netto")
+  }
+  { TextBox11 TextBox
+    MoveScaled(43,21,7,2)
+    'Move(430,210,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox12 TextBox
+    MoveScaled(43,23,7,2)
+    'Move(430,230,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox13 TextBox
+    MoveScaled(43,25,7,2)
+    'Move(430,250,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox14 TextBox
+    MoveScaled(51,21,7,2)
+    'Move(510,210,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox15 TextBox
+    MoveScaled(51,23,7,2)
+    'Move(510,230,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox16 TextBox
+    MoveScaled(51,25,7,2)
+    'Move(510,250,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox17 TextBox
+    MoveScaled(43,29,7,2)
+    'Move(430,290,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox18 TextBox
+    MoveScaled(51,29,7,2)
+    'Move(510,290,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { Label9 Label
+    MoveScaled(38,16,8,2)
+    'Move(380,160,80,20)
+    Text = ("Ausgaben")
+  }
+  { Label10 Label
+    MoveScaled(38,29,5,2)
+    'Move(380,290,50,20)
+    Text = ("Summe")
+  }
+  { Label11 Label
+    MoveScaled(38,25,4,2)
+    'Move(380,250,40,20)
+    Text = ("00%")
+  }
+  { Label12 Label
+    MoveScaled(38,23,4,2)
+    'Move(380,230,40,20)
+    Text = ("07%")
+  }
+  { Label13 Label
+    MoveScaled(38,21,4,2)
+    'Move(380,210,40,20)
+    Text = ("16%")
+  }
+  { Label14 Label
+    MoveScaled(51,19,5,2)
+    'Move(510,190,50,20)
+    Text = ("MwSt.")
+  }
+  { Label15 Label
+    MoveScaled(43,19,8,2)
+    'Move(430,190,80,20)
+    Text = ("netto")
+  }
+  { SpinBox1 SpinBox
+    MoveScaled(10,6,7,3)
+    'Move(100,60,70,30)
+    Value = 11
+    MinValue = 1
+    MaxValue = 12
+  }
+  { SpinBox2 SpinBox
+    MoveScaled(22,6,6,3)
+    'Move(220,60,60,30)
+    Value = 2005
+    MinValue = 2004
+    MaxValue = 2010
+  }
+  { TextBox1 TextBox
+    MoveScaled(23,23,7,2)
+    'Move(230,230,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox2 TextBox
+    MoveScaled(23,29,7,2)
+    'Move(230,290,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { Label16 Label
+    MoveScaled(23,19,5,2)
+    'Move(230,190,50,20)
+    Text = ("Summe")
+  }
+  { TextBox19 TextBox
+    MoveScaled(23,25,7,2)
+    'Move(230,250,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox20 TextBox
+    MoveScaled(23,21,7,2)
+    'Move(230,210,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox21 TextBox
+    MoveScaled(59,23,7,2)
+    'Move(590,230,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox22 TextBox
+    MoveScaled(59,29,7,2)
+    'Move(590,290,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { Label17 Label
+    MoveScaled(59,19,5,2)
+    'Move(590,190,50,20)
+    Text = ("Summe")
+  }
+  { TextBox23 TextBox
+    MoveScaled(59,25,7,2)
+    'Move(590,250,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox24 TextBox
+    MoveScaled(59,21,7,2)
+    'Move(590,210,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox25 TextBox
+    MoveScaled(30,40,7,2)
+    'Move(300,400,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox26 TextBox
+    MoveScaled(30,42,7,2)
+    'Move(300,420,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox27 TextBox
+    MoveScaled(30,44,7,2)
+    'Move(300,440,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox28 TextBox
+    MoveScaled(38,40,7,2)
+    'Move(380,400,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox29 TextBox
+    MoveScaled(38,42,7,2)
+    'Move(380,420,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox30 TextBox
+    MoveScaled(38,44,7,2)
+    'Move(380,440,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox31 TextBox
+    MoveScaled(30,48,7,2)
+    'Move(300,480,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox32 TextBox
+    MoveScaled(38,48,7,2)
+    'Move(380,480,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { Label18 Label
+    MoveScaled(25,35,10,2)
+    'Move(250,350,100,20)
+    Text = ("Monatsergebnis")
+  }
+  { Label19 Label
+    MoveScaled(25,48,5,2)
+    'Move(250,480,50,20)
+    Text = ("Summe")
+  }
+  { Label20 Label
+    MoveScaled(25,44,4,2)
+    'Move(250,440,40,20)
+    Text = ("00%")
+  }
+  { Label21 Label
+    MoveScaled(25,42,4,2)
+    'Move(250,420,40,20)
+    Text = ("07%")
+  }
+  { Label22 Label
+    MoveScaled(25,40,4,2)
+    'Move(250,400,40,20)
+    Text = ("16%")
+  }
+  { Label23 Label
+    MoveScaled(38,38,5,2)
+    'Move(380,380,50,20)
+    Text = ("MwSt.")
+  }
+  { Label24 Label
+    MoveScaled(30,38,8,2)
+    'Move(300,380,80,20)
+    Text = ("netto")
+  }
+  { TextBox33 TextBox
+    MoveScaled(46,42,7,2)
+    'Move(460,420,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox34 TextBox
+    MoveScaled(46,48,7,2)
+    'Move(460,480,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { Label25 Label
+    MoveScaled(46,38,5,2)
+    'Move(460,380,50,20)
+    Text = ("Summe")
+  }
+  { TextBox35 TextBox
+    MoveScaled(46,44,7,2)
+    'Move(460,440,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+  { TextBox36 TextBox
+    MoveScaled(46,40,7,2)
+    'Move(460,400,70,20)
+    Text = ("0")
+    Alignment = Align.Right
+    ReadOnly = True
+  }
+}

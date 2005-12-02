@@ -1,0 +1,177 @@
+PRIVATE sql_handle AS Result
+PRIVATE kunde AS NEW Main
+PRIVATE ok AS Boolean = TRUE
+
+PUBLIC SUB Form_Open()
+  ColumnView1_leave
+  grid_fill()
+  ComboBox4_click
+
+END
+
+PRIVATE SUB grid_fill()
+  DIM query AS String
+  DIM i AS Integer
+  columnview1.Clear
+  query = "select * from tab_kunden "
+  IF combobox1.Text = "Kunden" THEN query = query & " where kontaktgruppe=1"
+  IF combobox1.Text = "Lieferanten" THEN query = query & " where kontaktgruppe=2"
+  query = query & " order by kd_name"
+  sql_handle = kunde.sql_query(query)
+  Columnview1.Columns.Count = 7
+  Columnview1.Columns[0].Text = "Nr."
+  Columnview1.Columns[0].width = 1
+  Columnview1.Columns[1].Text = "Name"
+  Columnview1.Columns[2].Text = "Zusatz"
+  Columnview1.Columns[3].Text = "Strasse/Nr."
+  Columnview1.Columns[4].Text = "PLZ"
+  Columnview1.Columns[5].Text = "Ort"
+  Columnview1.Columns[6].Text = "Liefert"
+
+  i = 0
+  FOR EACH sql_handle
+    ColumnView1.Add(i, sql_handle!kd_nr)
+    Columnview1[i][1] = sql_handle!kd_name
+    Columnview1[i][2] = sql_handle!kd_name_zusatz
+    Columnview1[i][3] = sql_handle!kd_strasse & " " & sql_handle!kd_hausnr
+    Columnview1[i][4] = sql_handle!kd_plz
+    Columnview1[i][5] = sql_handle!kd_ort
+    Columnview1[i][6] = sql_handle!liefert
+    i = i + 1
+  NEXT
+END
+
+PUBLIC SUB ColumnView1_Click()
+  textbox3.Text = ColumnView1[columnview1.key][1] & " " & ColumnView1[columnview1.key][2]
+  textbox4.Text = ColumnView1[columnview1.key][0]
+END
+
+PUBLIC SUB ColumnView1_Enter()
+ columnview1.Move(11, 77, 770, 253)
+END
+PUBLIC SUB ColumnView1_leave()
+ columnview1.move(11, 77, 770, 30)
+END
+PUBLIC SUB Button3_Click()
+  ME.Close
+  dokverwaltung.Show
+END
+
+PUBLIC SUB Button4_Click()
+  IF Dialog.OpenFile() THEN RETURN
+  textbox8.Text = dialog.Path
+END
+
+PUBLIC SUB ComboBox1_click()
+  grid_fill
+END
+
+PUBLIC SUB Button1_Click()
+  pruefe
+  IF ok = TRUE THEN
+    scannen
+  ELSE
+    message("es sind nicht alle benötigten Felder ausgefüllt!")
+  END IF
+  ME.Close
+  dokverwaltung.Show
+  dokverwaltung.grid_fill
+END
+
+PUBLIC FUNCTION pruefe() AS Boolean
+  ok = TRUE
+  IF textbox4.Text = "" THEN ok = FALSE
+  IF combobox4.Text = "Rechnung" THEN
+    IF textbox14.Text = "0" THEN ok = FALSE
+  END IF
+END
+
+PUBLIC SUB TextBox11_Change()
+  IF textbox11.Text = "" THEN textbox11.Text = 0
+  berechne_werte
+END
+
+PUBLIC SUB berechne_werte()
+  textbox15.text = ((textbox11.Text / 100) * 16)
+  textbox16.Text = ((textbox12.Text / 100) * 7)
+  textbox2.Text = 0
+  textbox13.Text = textbox1.Text + textbox11.Text + textbox12.Text
+  textbox17.Text = textbox15.Text + textbox16.Text + textbox2.Text
+  textbox14.Text = Round((textbox13.Text + textbox17.Text), -2)
+END
+
+PUBLIC SUB TextBox12_Change()
+  IF textbox12.Text = "" THEN textbox12.Text = 0
+  berechne_werte
+END
+
+PUBLIC SUB TextBox1_Change()
+  IF textbox1.Text = "" THEN textbox1.Text = 0
+  berechne_werte
+END
+
+PUBLIC SUB scannen()
+  DIM maxkey AS Result
+  DIM max_dok AS result
+  DIM scanbefehl AS String
+  DIM neu_dok AS Integer
+  DIM test AS String
+  DIM scanformat AS String
+  DIM i AS Integer
+  einfuegen()
+
+  max_dok = kunde.sql_query("select max(dok_id) as maxdok from kd_dokumente")
+  neu_dok = max_dok!maxdok
+  scanbefehl = "scanimage -d microtek2:/dev/sg0 --format tiff --resolution 300 --mode gray -l 0 -t 0  "
+  IF combobox5.Text = "A4" THEN scanformat = " -x 210 -y 297 "
+  IF combobox5.Text = "A5 hochformat" THEN scanformat = " -x 149 -y 210 "
+
+  FOR i = 1 TO textbox27.Text STEP 1
+    IF textbox27.Text > "1" THEN
+      message("Bitte Seite " & i & " einlegen!")
+    END IF
+    SHELL scanbefehl & scanformat & " > /daten/wws/dokumente/" & textbox4.Text & "." & neu_dok & "-" & i & ".tiff" WAIT
+    SHELL "convert /daten/wws/dokumente/" & textbox4.Text & "." & neu_dok & "-" & i & ".tiff /daten/wws/dokumente/" & textbox4.Text & "." & neu_dok & "-" & i & ".jpeg" WAIT
+    SHELL "rm /daten/wws/dokumente/" & textbox4.Text & "." & neu_dok & "-" & i & ".tiff"
+  NEXT
+  main.sql_query("update kd_dokumente set dateiname=\"" & textbox4.Text & "." & neu_dok &  "\" where dok_id=" & neu_dok)
+
+END
+
+PUBLIC SUB einfuegen()
+  DIM ergebnis AS Result
+  DIM query AS String
+  DIM max_dok AS result
+  query = "insert into kd_dokumente (kd_nr,richtung,art,thema,kommentar,stichwort,datum,zeit) values(\"" & textbox4.Text & "\",\"" & combobox3.Text & "\",\"" & combobox4.Text & "\",\"" & textbox5.Text & "\",\"" & textbox6.Text & "\",\"" & textbox7.Text & "\",CURDATE(),CURTIME())" ""
+  'message(query)
+  ergebnis = kunde.sql_query(query)
+
+  max_dok = kunde.sql_query("select max(dok_id) as maxdok from kd_dokumente")
+  query = "update kd_dokumente set  rg_nr=\"" & textbox9.text & "\" where dok_id=" & max_dok!maxdok
+  ergebnis = kunde.sql_query(query)
+  ergebnis = kunde.sql_query("update kd_dokumente set  rg_nr=\"" & textbox9.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  rg_dat=\"" & textbox18.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  sum_16=\"" & textbox11.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  sum_07=\"" & textbox12.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  sum_00=\"" & textbox1.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  rg_posten=\"" & textbox10.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  ablageort=\"" & textbox23.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  inhalt=\"" & textbox22.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  faellig=\"" & textbox19.text & "\" where dok_id=" & max_dok!maxdok)
+  ergebnis = kunde.sql_query("update kd_dokumente set  seiten=\"" & textbox27.text & "\" where dok_id=" & max_dok!maxdok)
+END
+
+PUBLIC SUB ComboBox4_click()
+  frame2.Visible = FALSE
+  frame4.Visible = FALSE
+  frame5.Visible = FALSE
+  IF combobox4.Current.Text = "Rechnung" THEN
+     frame2.Visible = TRUE
+  END IF
+  IF combobox4.Current.Text = "Sonstiges" THEN
+     frame4.Visible = TRUE
+  END IF
+  IF combobox4.Current.Text = "Mahnung" THEN
+     frame5.Visible = TRUE
+  END IF
+END

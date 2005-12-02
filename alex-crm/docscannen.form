@@ -1,0 +1,114 @@
+# Gambas Form File 1.0
+
+{ docscannen Form
+  MoveScaled(17.7273,20.4545,85.3636,44.7273)
+  'Move(195,225,939,492)
+  Text = ("")
+  Mask = True
+  { Label1 Label
+    MoveScaled(1,1,27,2)
+    'Move(11,11,297,22)
+    Font = Font["Nimbus Sans L,Bold,+1"]
+    Text = ("Neues Dokument scannen")
+  }
+  { Button1 Button
+    MoveScaled(1,41,9,3)
+    'Move(11,451,99,33)
+    Text = ("Los!")
+  }
+  { Frame1 Frame
+    MoveScaled(1,4,83,36)
+    'Move(11,44,913,396)
+    Text = ("Vorsortierung")
+    { ComboBox4 ComboBox
+      MoveScaled(10,18,16.7273,2.3636)
+      'Move(110,198,184,26)
+      Text = (" ")
+      ReadOnly = True
+      List = ("Rechnung\nBesuchsbericht\nBriefkopf\nBrief\nMahnung\nAngebot\nAngebotsbestätigung\nReklamation\nSonstiges")
+    }
+    { Label4 Label
+      MoveScaled(1,18,3,2)
+      'Move(11,198,33,22)
+      Text = ("Art:")
+    }
+    { Label2 Label
+      MoveScaled(1,22,9,2)
+      'Move(11,242,99,22)
+      Text = ("Seitenanzahl:")
+    }
+    { Label8 Label
+      MoveScaled(56,11,7,2)
+      'Move(616,121,77,22)
+      Text = ("Kontakt ID:")
+    }
+    { TextBox4 TextBox
+      MoveScaled(64,11,7,2)
+      'Move(704,121,77,22)
+      Text = ("")
+      ReadOnly = True
+    }
+    { TextBox3 TextBox
+      MoveScaled(10,11,45,2)
+      'Move(110,121,495,22)
+      Text = ("")
+      ReadOnly = True
+    }
+    { Label5 Label
+      MoveScaled(1,11,9,2)
+      'Move(11,121,99,22)
+      Text = ("Kontakt ID:")
+    }
+    { Label3 Label
+      MoveScaled(1,16,6,2)
+      'Move(11,176,66,22)
+      Text = ("Richtung:")
+    }
+    { ComboBox3 ComboBox
+      MoveScaled(10,15,16.7273,1.5455)
+      'Move(110,165,184,17)
+      Text = (" ")
+      ReadOnly = True
+      List = ("eingehend\nausgehend")
+    }
+    { TextBox1 TextBox
+      MoveScaled(10,22,8,2)
+      'Move(110,242,88,22)
+      Text = ("1")
+    }
+    { ColumnView1 ColumnView
+      MoveScaled(1,6,81,3)
+      'Move(11,66,891,33)
+      Sorted = True
+    }
+    { ComboBox1 ComboBox
+      MoveScaled(54,2,16.7273,2.3636)
+      'Move(594,22,184,26)
+      Text = (" ")
+      ReadOnly = True
+      List = ("alle\nLieferanten\nKunden")
+    }
+    { Label9 Label
+      MoveScaled(46,3,7,2)
+      'Move(506,33,77,22)
+      Text = ("Anzeigen:")
+    }
+    { ComboBox5 ComboBox
+      MoveScaled(10,24,15,2)
+      'Move(110,264,165,22)
+      Text = (" ")
+      ReadOnly = True
+      List = ("A4\nA5 hochformat")
+    }
+    { Label6 Label
+      MoveScaled(1,25,9,2)
+      'Move(11,275,99,22)
+      Text = ("Format:")
+    }
+  }
+  { Button2 Button
+    MoveScaled(75,41,9,3)
+    'Move(825,451,99,33)
+    Text = ("beenden")
+  }
+}

@@ -1,0 +1,121 @@
+# Gambas Form File 1.0
+
+{ dokverwaltung Form
+  MoveScaled(3.6,0.2,69.1,51.7)
+  'Move(36,2,691,517)
+  Text = ("")
+  Border = Window.Fixed
+  { ColumnView1 ColumnView
+    MoveScaled(1,3,67,23)
+    'Move(10,30,670,230)
+    Sorted = True
+  }
+  { Label1 Label
+    MoveScaled(1,0,13,2)
+    'Move(10,0,130,20)
+    Text = ("erfasste Dokumente:")
+  }
+  { Button1 Button
+    MoveScaled(28,29,13,2)
+    'Move(280,290,130,20)
+    Text = ("ansehen")
+  }
+  { TextBox1 TextBox
+    MoveScaled(10,35,13,2)
+    'Move(100,350,130,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label2 Label
+    MoveScaled(1,35,9,2)
+    'Move(10,350,90,20)
+    Text = ("Dokument-ID:")
+  }
+  { Button2 Button
+    MoveScaled(1,47,12,2)
+    'Move(10,470,120,20)
+    Text = ("beenden")
+  }
+  { Frame1 Frame
+    MoveScaled(1,27,26,7)
+    'Move(10,270,260,70)
+    Text = ("Liste filtern:")
+    { ComboBox1 ComboBox
+      MoveScaled(7,2,17,1)
+      'Move(70,20,170,10)
+      Text = (" ")
+      ReadOnly = True
+      List = ("alle\neingehend\nausgehend")
+    }
+    { Label3 Label
+      MoveScaled(1,3,6,2)
+      'Move(10,30,60,20)
+      Text = ("Richtung:")
+    }
+  }
+  { Button3 Button
+    MoveScaled(16,47,12,2)
+    'Move(160,470,120,20)
+    Text = ("neu")
+  }
+  { TextBox2 TextBox
+    MoveScaled(10,38,13,2)
+    'Move(100,380,130,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label4 Label
+    MoveScaled(1,38,9,2)
+    'Move(10,380,90,20)
+    Text = ("Richtung:")
+  }
+  { TextBox3 TextBox
+    MoveScaled(10,41,13,2)
+    'Move(100,410,130,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label5 Label
+    MoveScaled(1,41,9,2)
+    'Move(10,410,90,20)
+    Text = ("Kontakt:")
+  }
+  { TextBox4 TextBox
+    MoveScaled(10,44,13,2)
+    'Move(100,440,130,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label6 Label
+    MoveScaled(1,44,9,2)
+    'Move(10,440,90,20)
+    Text = ("Dokument-ID:")
+  }
+  { TextBox5 TextBox
+    MoveScaled(34,38,13,2)
+    'Move(340,380,130,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label7 Label
+    MoveScaled(25,38,9,2)
+    'Move(250,380,90,20)
+    Text = ("Dokument-Art:")
+  }
+  { TextBox6 TextBox
+    MoveScaled(34,41,13,2)
+    'Move(340,410,130,20)
+    Text = ("")
+    ReadOnly = True
+  }
+  { Label8 Label
+    MoveScaled(25,41,9,2)
+    'Move(250,410,90,20)
+    Text = ("Datum:")
+  }
+  { Button4 Button
+    MoveScaled(37,47,12,2)
+    'Move(370,470,120,20)
+    Text = ("neu - scannen")
+  }
+}

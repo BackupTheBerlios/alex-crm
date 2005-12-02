@@ -1,0 +1,110 @@
+' Gambas class file
+ rechnung AS NEW Main
+
+PUBLIC SUB Button2_Click()
+  ME.Close
+END
+
+PUBLIC SUB berechnen()
+  DIM query AS String
+  DIM jahr AS Integer
+  DIM monat AS Integer
+  DIM ergebnis AS Result
+  monat = spinbox1.Text
+  jahr = spinbox2.Text
+
+  query = "select * from kd_dokumente where rg_dat>=\"" & jahr & "-" & monat & "-" & "01\" and rg_dat<=\"" & jahr & "-" & monat & "-" & "31\""
+
+  ergebnis = rechnung.sql_query(query)
+  FOR EACH ergebnis
+    IF ergebnis!richtung = "ausgehend" THEN
+      textbox3.text += ergebnis!sum_16
+      textbox4.text += ergebnis!sum_07
+      textbox5.text += ergebnis!sum_00
+      textbox6.text = (textbox3.Text / 100) * 16
+      textbox7.text = (textbox4.Text / 100) * 07
+      textbox8.text = 0
+      textbox20.text = textbox3.Text + textbox6.Text
+      textbox1.text = textbox4.Text + textbox7.Text
+      textbox19.text = textbox5.Text
+      textbox9.text = textbox3.Text + textbox4.Text + textbox5.Text
+      textbox10.text = textbox6.Text + textbox7.Text + textbox8.Text
+      textbox2.text = textbox20.Text + textbox1.Text + textbox19.Text
+    END IF
+    IF ergebnis!richtung = "eingehend" THEN
+      textbox11.text += ergebnis!sum_16
+      textbox12.text += ergebnis!sum_07
+      textbox13.text += ergebnis!sum_00
+      textbox14.text = (textbox11.Text / 100) * 16
+      textbox15.text = (textbox12.Text / 100) * 07
+      textbox16.text = 0
+      textbox24.Text = textbox11.text + textbox14.Text
+      textbox21.Text = textbox12.text + textbox15.Text
+      textbox23.Text = textbox13.text
+      textbox17.Text = textbox11.Text + textbox12.Text + textbox13.Text
+      textbox18.Text = textbox14.Text + textbox15.Text + textbox16.Text
+      textbox22.Text = textbox24.Text + textbox21.Text + textbox23.Text
+    END IF
+  NEXT
+  textbox25.Text = textbox3.Text - textbox11.Text
+  textbox26.Text = textbox4.Text - textbox12.Text
+  textbox27.Text = textbox5.Text - textbox13.Text
+
+  textbox28.Text = textbox6.Text - textbox14.Text
+  textbox29.Text = textbox7.Text - textbox15.Text
+  textbox30.Text = textbox8.Text - textbox16.Text
+
+  textbox36.Text = textbox20.Text - textbox24.Text
+  textbox33.Text = textbox1.Text - textbox21.Text
+  textbox35.Text = textbox19.Text - textbox23.Text
+
+  textbox31.Text = textbox9.Text - textbox17.Text
+  textbox32.Text = textbox10.Text - textbox18.Text
+  textbox34.Text = textbox2.Text - textbox22.Text
+END
+
+PUBLIC SUB ruecksetzen()
+  textbox3.text = 0
+  textbox4.text = 0
+  textbox5.text = 0
+  textbox6.text = 0
+  textbox7.text = 0
+  textbox8.text = 0
+  textbox9.text = 0
+  textbox10.text = 0
+  textbox11.text = 0
+  textbox12.text = 0
+  textbox13.text = 0
+  textbox14.text = 0
+  textbox15.text = 0
+  textbox16.text = 0
+  textbox17.text = 0
+  textbox18.text = 0
+  textbox19.text = 0
+  textbox20.text = 0
+  textbox21.text = 0
+  textbox22.text = 0
+  textbox23.text = 0
+  textbox24.text = 0
+  textbox25.text = 0
+  textbox26.text = 0
+  textbox27.text = 0
+  textbox28.text = 0
+  textbox29.text = 0
+  textbox30.text = 0
+  textbox31.text = 0
+  textbox32.text = 0
+  textbox33.text = 0
+  textbox34.text = 0
+  textbox35.text = 0
+  textbox36.text = 0
+END
+
+PUBLIC SUB SpinBox1_Change()
+ruecksetzen
+berechnen
+END
+PUBLIC SUB SpinBox2_Change()
+ruecksetzen
+berechnen
+END

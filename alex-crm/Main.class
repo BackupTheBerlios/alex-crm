@@ -1,0 +1,37 @@
+' Gambas class file
+STATIC sql_open AS Boolean
+STATIC conn AS NEW Connection
+PUBLIC authenticated AS String
+
+PUBLIC SUB _new()
+IF (sql_open = FALSE) THEN make_connection
+END
+
+STATIC PUBLIC FUNCTION sql_query(query AS String) AS result
+  DIM res AS Result
+  DIM sql AS String
+  sql = query
+  res = conn.Exec(sql)
+  RETURN res
+END
+
+STATIC FUNCTION make_connection() AS Boolean
+  WITH conn
+    .Type = "mysql"
+    .Host = "localhost"
+    .Login = "root"
+    .Password = ""
+    .Name = "ciric"
+  TRY conn.Open
+  IF ERROR THEN
+    Message("Cannot Open Database. Error = " & Error.Text)
+    RETURN FALSE
+  END IF
+  sql_open = TRUE
+  RETURN TRUE
+END WITH
+END
+
+PUBLIC SUB _free()
+'conn.Close
+END

@@ -1,0 +1,69 @@
+# Gambas Form File 1.0
+
+{ ak_notiz_neu Form
+  MoveScaled(14,11.5455,73.5455,30)
+  'Move(154,127,809,330)
+  Text = ("")
+  Maximized = True
+  { Label1 Label
+    MoveScaled(2,1,12,3)
+    'Move(22,11,132,33)
+    Font = Font["Andale Mono,Bold,+1"]
+    Text = ("Kontakt:")
+    Border = Border.Etched
+  }
+  { TextBox1 TextBox
+    MoveScaled(15,1,56.7273,2.9091)
+    'Move(165,11,624,32)
+    Font = Font["Andale Mono,+1"]
+    Text = ("")
+    ReadOnly = True
+  }
+  { Button1 Button
+    MoveScaled(25,24,15,2.9091)
+    'Move(275,264,165,32)
+    Text = ("speichern")
+  }
+  { Label5 Label
+    MoveScaled(2,7,12,2)
+    'Move(22,77,132,22)
+    Text = ("Gesprächspartner")
+  }
+  { TextBox4 TextBox
+    MoveScaled(2,9,26,3)
+    'Move(22,99,286,33)
+    Text = ("")
+  }
+  { Label6 Label
+    MoveScaled(2,12,9,2)
+    'Move(22,132,99,22)
+    Text = ("Inhalt:")
+  }
+  { TextArea1 TextArea
+    MoveScaled(2,14,70,7)
+    'Move(22,154,770,77)
+    Text = ("")
+  }
+  { ComboBox1 ComboBox
+    MoveScaled(2,24,21,3)
+    'Move(22,264,231,33)
+    Text = (" ")
+    ReadOnly = True
+    List = ("Offen\nkein Interesse, freundlich\nkein Interesse, unfreundlich\nwieder anrufen\nTermin wurde vereinbart\nmelden sich\nfalsche Telefonnummer\nFax schicken")
+  }
+  { Label2 Label
+    MoveScaled(2,22,9,2)
+    'Move(22,242,99,22)
+    Text = ("Ergebnis:")
+  }
+  { Button2 Button
+    MoveScaled(42,24,15,2.9091)
+    'Move(462,264,165,32)
+    Text = ("abbrechen")
+  }
+  { Button3 Button
+    MoveScaled(43,5,8,7)
+    'Move(473,55,88,77)
+    Text = ("InfoFax \ngenerieren")
+  }
+}

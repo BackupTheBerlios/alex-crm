@@ -1,0 +1,11 @@
+PRIVATE akquise AS Integer
+PRIVATE sql_firma AS Result
+
+PUBLIC SUB vorbereiten()
+  akquise = akquiseliste.ak_nr
+  sql_firma = main.sql_query("select * from tab_akquise where ak_nr=" & akquise)
+
+  SHELL "php /daten/htdocs/www/faxmodul/generiere_infofax.php " & sql_firma!ak_nr WAIT
+
+
+ END
