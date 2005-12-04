@@ -1,0 +1,49 @@
+projekte AS NEW main
+PUBLIC projektnummer AS Integer
+PUBLIC SUB _new()
+  DIM liste AS Result
+  liste = projekte.sql_query("select * from tab_ak_projekte")
+  FOR EACH liste
+    listview1.Add(liste!proj_id, liste!proj_beschreibung)
+  NEXT
+END
+
+PUBLIC SUB Button1_Click()
+'  login.Minimized = TRUE
+  kundenliste.Show
+END
+
+PUBLIC SUB Button2_Click()
+listeoeffnen
+END
+
+PUBLIC SUB Button3_Click()
+  ME.Close
+END
+
+PUBLIC SUB Button4_Click()
+'  login.Minimized = TRUE
+  dokverwaltung.Show
+END
+
+PUBLIC SUB ListView1_DblClick()
+listeoeffnen
+END
+
+PRIVATE SUB listeoeffnen()
+  DIM liste AS Result
+  projektnummer = listview1.Key
+  liste = projekte.sql_query("select count(ak_nr) as anzahl from tab_akquise where ak_projekt=" & projektnummer)
+  IF liste!anzahl > 0 THEN
+'    login.Minimized = TRUE
+    akquiseliste.show()
+  ELSE
+    message("Dieses Projekt enthält noch keine Datensätze!")
+  END IF
+END
+
+PUBLIC SUB Button5_Click()
+
+kdustva.Show
+
+END

@@ -1,0 +1,78 @@
+dokument AS NEW Main
+kunde AS NEW Main
+dok_basispfad AS String = "/daten/wws/dokumente/"
+PUBLIC dok_id AS Integer
+PRIVATE base_query AS String = "select * from kd_dokumente "
+sql_handle AS Result
+query AS String
+
+PUBLIC SUB Form_Open()
+  grid_fill()
+END
+
+PUBLIC SUB grid_fill()
+  DIM i AS Integer
+  DIM kundenname AS Result
+  DIM res AS result
+
+  IF combobox1.Text = "alle" THEN
+    query = base_query
+  ELSE
+     query = base_query & " where richtung=\"" & combobox1.Text & "\""
+  END IF
+
+  res = dokument.sql_query(query)
+
+  columnview1.Clear
+  res = dokument.sql_query(query)
+  Columnview1.Columns.Count = 9
+  Columnview1.Columns[0].Text = "Nr."
+  Columnview1.Columns[0].width = 1
+  Columnview1.Columns[1].Text = "Datum"
+  Columnview1.Columns[2].Text = "Zeit"
+  Columnview1.Columns[3].Text = "Kunde"
+  Columnview1.Columns[4].Text = "Richtung"
+  Columnview1.Columns[5].Text = "Art"
+  Columnview1.Columns[6].Text = "Thema"
+  Columnview1.Columns[7].Text = "Dateiname"
+  Columnview1.Columns[8].Text = "Seiten"
+  i = 0
+  FOR EACH res
+    ColumnView1.Add(i, res!dok_id)
+    Columnview1[i][1] = res!datum
+    Columnview1[i][2] = res!zeit
+    kundenname = kunde.sql_query("select * from tab_kunden where kd_nr=" & res!kd_nr)
+    Columnview1[i][3] = kundenname!kd_name
+    Columnview1[i][4] = res!richtung
+    Columnview1[i][5] = res!art
+    Columnview1[i][6] = res!thema
+    Columnview1[i][7] = res!dateiname
+    Columnview1[i][8] = res!seiten
+    i = i + 1
+  NEXT
+END
+
+PUBLIC SUB Button2_Click()
+'  login.show
+  ME.Close
+END
+
+PUBLIC SUB Button1_Click()
+  IF ColumnView1[columnview1.key][8] = 0 THEN SHELL "eog " & dok_basispfad & ColumnView1[columnview1.key][7]
+  IF ColumnView1[columnview1.key][8] = 1 THEN SHELL "eog " & dok_basispfad & ColumnView1[columnview1.key][7] & "-1.jpeg"
+END
+
+PUBLIC SUB Button3_Click()
+  dokneu.Show
+END
+PUBLIC SUB ComboBox1_click()
+  grid_fill()
+END
+
+PUBLIC SUB ColumnView1_Click()
+  textbox1.Text = columnview1[columnview1.key][0]
+END
+
+PUBLIC SUB Button4_Click()
+  docscannen.Show
+END
