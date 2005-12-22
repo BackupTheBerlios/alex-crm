@@ -1,0 +1,227 @@
+PRIVATE base_query AS String = "select * from tab_akquise where ak_projekt=" & akprojauswaehlen.projektnummer & " "
+PRIVATE query AS String
+PRIVATE sql_handle AS Result
+PUBLIC ak_nr AS Integer
+PRIVATE akquisition AS NEW Main
+
+
+PUBLIC SUB Form_Open()
+  query = Base_query
+  sql_handle = akquisition.sql_query(base_query)
+  grid_fill(sql_handle)
+END
+
+PRIVATE SUB grid_fill(res AS result)
+  DIM i AS Integer
+  columnview1.Clear
+  sql_handle = akquisition.sql_query(query)
+  Columnview1.Columns.Count = 8
+  Columnview1.Columns[0].Text = "Nr."
+  Columnview1.Columns[0].width = 1
+  Columnview1.Columns[1].Text = "Titel"
+  Columnview1.Columns[2].Text = "Vorname"
+  Columnview1.Columns[3].Text = "Name"
+  Columnview1.Columns[4].Text = "Zusatz"
+  Columnview1.Columns[5].Text = "Vorwahl"
+  Columnview1.Columns[6].Text = "Telefon"
+  Columnview1.Columns[7].Text = "Branche"
+  i = 0
+  FOR EACH res
+    ColumnView1.Add(i, res!ak_nr)
+    Columnview1[i][1] = res!ak_titel
+    Columnview1[i][2] = res!ak_vorname
+    Columnview1[i][3] = res!ak_name
+    Columnview1[i][4] = res!ak_namenszusatz
+    Columnview1[i][5] = res!ak_vorwahl
+    Columnview1[i][6] = res!ak_telefon
+    Columnview1[i][7] = res!ak_branche
+    i = i + 1
+  NEXT
+END
+
+PUBLIC SUB Button1_Click()
+'  login.show
+  ME.Close
+hauptfenster.activate_menu("akquise")
+END
+PUBLIC SUB Button2_Click()
+  akquiseliste.Minimized = TRUE
+  akview.Show()
+END
+
+PUBLIC SUB ColumnView1_Click()
+  DIM res AS Result
+  res = akquisition.sql_query("select * from tab_akquise where ak_nr=" & ColumnView1[columnview1.key][0] & " order by ak_name")
+  textbox1.Text = res!ak_nr ' kd_nr
+  textbox16.Text = res!ak_vorname 'name
+  textbox17.Text = res!ak_titel 'zusatz
+  textbox3.Text = res!ak_name 'name
+  textbox4.Text = res!ak_namenszusatz 'zusatz
+  textbox2.Text = res!ak_branche 'branche
+  textbox5.Text = res!ak_strasse 'strasse
+  textbox6.Text = res!ak_hausnr
+  TextBox11.Text = res!ak_plz
+  textbox7.Text = res!ak_ort
+  textbox12.Text = res!ak_vorwahl
+  textbox8.Text = res!ak_telefon
+  textbox9.Text = res!ak_faxnummer
+  textbox10.Text = res!ak_status
+
+'Füllen der Notizen
+  notizen_fill(ColumnView1[columnview1.key][0])
+'Leeren der Notizetails für den Fall eines Kundenwechsels zu einem Kunden ohne Notiz
+  textbox13.Text = ""
+  textbox14.Text = ""
+  textbox15.Text = ""
+  textarea1.Text = ""
+' ENDE: Füllen der Notizen
+  ak_nr = res!ak_nr
+  columnview2_click
+END
+
+PUBLIC SUB ColumnView1_KeyRelease()
+  ColumnView1_Click
+END
+
+PUBLIC SUB ColumnView1_KeyPress()
+  DIM taste AS String
+  taste = key.Code
+IF taste = 4100 THEN
+   akquiseliste.Minimized = TRUE
+   akview.Show()
+END IF
+END
+
+PUBLIC SUB RadioButton1_Click()
+  query = base_query
+  grid_fill(sql_handle)
+END
+PUBLIC SUB RadioButton2_Click()
+  query = base_query & " and ak_status=\"offen\" "
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB RadioButton3_Click()
+  IF RadioButton3.value = TRUE THEN
+    query = base_query & " and ak_status=\"Termin wurde vereinbart\" "
+  ELSE
+    query = base_query
+  END IF
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB RadioButton4_Click()
+  IF RadioButton4.value = TRUE THEN
+    query = base_query & " and ak_status=\"melden sich\" "
+  ELSE
+    query = base_query
+  END IF
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB RadioButton5_Click()
+  IF RadioButton5.value = TRUE THEN
+    query = base_query & " and ak_status=\"kein Interesse, freundlich\" "
+  ELSE
+    query = base_query
+  END IF
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB RadioButton6_Click()
+  IF RadioButton6.value = TRUE THEN
+    query = base_query & " and ak_status=\"kein Interesse, unfreundlich\" "
+  ELSE
+    query = base_query
+  END IF
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB RadioButton7_Click()
+  IF RadioButton7.value = TRUE THEN
+    query = base_query & " and ak_status=\"wieder anrufen\" "
+  ELSE
+    query = base_query
+  END IF
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB ColumnView1_DblClick()
+  akquiseliste.Minimized = TRUE
+  akview.Show()
+END
+
+PUBLIC SUB Button3_Click() ' Speichern der Adressdaten der Akquisefirmen.
+  akquisition.sql_query("update tab_akquise set ak_titel=\"" & textbox17.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_vorname=\"" & textbox16.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_name=\"" & textbox3.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_namenszusatz=\"" & textbox4.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_strasse=\"" & textbox5.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_hausnr=\"" & textbox6.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_plz=\"" & textbox11.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_ort=\"" & textbox7.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_branche=\"" & textbox2.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_vorwahl=\"" & textbox12.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_telefon=\"" & textbox8.Text & "\" where ak_nr=" & ak_nr)
+  akquisition.sql_query("update tab_akquise set ak_faxnummer=\"" & textbox9.Text & "\" where ak_nr=" & ak_nr)
+  ColumnView1_Click()
+'form_open <- deaktiviert weil sonst der Fokus des Columnview 1 verloren geht...
+END
+
+PUBLIC SUB Button6_Click()
+  akquiseliste.close
+  ak_notiz_neu.Show
+END
+
+PRIVATE SUB notizen_fill(aknr AS Integer) 'Füllen des Columnview welches die Notizliste enthält.
+  DIM i AS Integer
+  DIM res AS Result
+  res = akquisition.sql_query("select * from tab_ak_notizen where ak_nr=" & aknr)
+  columnview2.Clear
+  Columnview2.Columns.Count = 5
+  Columnview2.Columns[0].Text = "ID"
+  Columnview2.Columns[0].width = 55
+  Columnview2.Columns[1].Text = "Datum"
+  Columnview2.Columns[2].Text = "Uhrzeit"
+  Columnview2.Columns[3].Text = "Gesprächspartner"
+  Columnview2.Columns[4].Text = "Inhalt"
+  i = 0
+  FOR EACH res
+    ColumnView2.Add(i, res!notiz_id)
+    Columnview2[i][1] = res!datum
+    Columnview2[i][2] = res!time
+    Columnview2[i][3] = res!gespr_partner
+    Columnview2[i][4] = res!notiz
+    i = i + 1
+  NEXT
+END
+
+
+PUBLIC SUB ColumnView2_Click() ' Füllen der Textboxen des angeklicken Ansprechpartners.
+  DIM res AS Result
+  res = akquisition.sql_query("select count(notiz_id) as anzahl from tab_ak_notizen where ak_nr=" & ak_nr)
+  IF res!anzahl > 0 THEN
+    res = akquisition.sql_query("select * from tab_ak_notizen where notiz_id=" & ColumnView2[columnview2.key][0])
+    textbox13.Text = res!datum
+    textbox14.Text = res!time
+    textbox15.Text = res!gespr_partner
+    textarea1.Text = res!notiz
+  END IF
+END
+
+PUBLIC SUB RadioButton8_Click()
+  IF RadioButton8.value = TRUE THEN
+    query = base_query & " and ak_status=\"falsche Telefonnummer\" "
+  ELSE
+    'query = base_query
+  END IF
+  grid_fill(sql_handle)
+END
+
+PUBLIC SUB Button7_Click()
+  SHELL "xpdf /daten/htdocs/www/faxmodul/pdf/" & ak_nr & "_tmp.pdf"
+END
+
+PUBLIC SUB Form_Close()
+hauptfenster.kd_open = 0
+END

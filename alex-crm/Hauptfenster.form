@@ -1,0 +1,44 @@
+# Gambas Form File 1.0
+
+{ Hauptfenster Form
+  MoveScaled(5.1,3.5,102.4,76.8)
+  'Move(51,35,1024,768)
+  Text = ("")
+  Maximized = True
+  { Menu1 Menu
+    Text = ("&Programm")
+    { beenden Menu
+      Text = ("beenden")
+    }
+  }
+  { Stammdaten Menu
+    Text = ("Stammdaten")
+    { Kunden Menu
+      Text = ("Kunden")
+    }
+    { Personal Menu
+      Text = ("Personal")
+    }
+  }
+  { Akquise Menu
+    Text = ("Akquise")
+    { akopen Menu
+      Text = ("Projekt auswählen")
+    }
+    { verwalten Menu
+      Text = ("Projekte verwalten")
+    }
+  }
+  { Dokumentenverwaltung Menu
+    Text = ("Dokumentenverwaltung")
+  }
+  { Einstellungen Menu
+    Text = ("Einstellungen")
+    { firmeneinst Menu
+      Text = ("eigene Stammdaten")
+    }
+    { optionen Menu
+      Text = ("Optionen")
+    }
+  }
+}

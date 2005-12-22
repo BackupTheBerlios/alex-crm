@@ -1,0 +1,61 @@
+' Gambas class file
+STATIC PUBLIC kd_open AS Integer
+STATIC PUBLIC ak_open AS Integer
+
+PUBLIC SUB _new()
+
+END
+
+PUBLIC SUB _free()
+
+END
+
+STATIC PUBLIC FUNCTION Run() AS Boolean
+  DIM hForm AS Form
+  kd_open = 0
+  ak_open = 0
+  hForm = NEW Hauptfenster
+  RETURN hForm.ShowModal()
+END
+PUBLIC SUB beenden_Click()
+  ME.Close()
+END
+
+
+PUBLIC SUB Kunden_Click()
+  IF kd_open = 0 THEN
+    kunden.Enabled = FALSE
+    open_kdliste
+  END IF
+END
+
+PUBLIC SUB akopen_Click()
+  IF ak_open = 0 THEN
+    akopen.Enabled = FALSE
+    open_akquise
+  END IF
+END
+
+
+PUBLIC SUB open_kdliste()
+  DIM embed_kundenliste AS form
+  embed_kundenliste = NEW kundenliste(ME)
+  embed_kundenliste.move(0, 0, ME.width, ME.height)
+END
+
+PUBLIC SUB open_akquise()
+  DIM embed_akquiseliste AS form
+  embed_akquiseliste = NEW akquiseliste(ME)
+  embed_akquiseliste.move(0, 0, ME.width, ME.height)
+END
+
+PUBLIC SUB activate_menu(menu AS String)
+  IF menu = "kunden" THEN
+    kunden.enabled = TRUE
+    kd_open = 0
+  END IF
+  IF menu = "akquise" THEN
+    akopen.enabled = TRUE
+    ak_open = 0
+  END IF
+END

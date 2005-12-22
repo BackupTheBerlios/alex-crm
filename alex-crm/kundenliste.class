@@ -1,0 +1,248 @@
+PUBLIC kunde AS Integer
+base_query AS String = "select * from tab_kunden "
+query AS String
+kunden AS NEW Main
+ansprechpartner AS NEW Main
+notizen AS NEW Main
+
+PUBLIC SUB Form_Open()
+  grid_fill()
+END
+
+PRIVATE SUB grid_fill() 'Füllen des Columnview welches die Kundenliste enthält.
+  DIM res AS Result
+  DIM i AS Integer
+  columnview1.Clear
+  Columnview1.Columns.Count = 5
+  Columnview1.Columns[0].Text = "KD Nr."
+  Columnview1.Columns[0].width = 55
+  Columnview1.Columns[1].Text = "Name"
+  Columnview1.Columns[2].Text = "Zusatz"
+  Columnview1.Columns[3].Text = "Strasse/Nr."
+  Columnview1.Columns[4].Text = "Telefon"
+  i = 0
+
+  IF combobox1.Text = "Kunden" THEN query = base_query & " where kontaktgruppe=1 "
+  IF combobox1.Text = "Lieferanten" THEN query = base_query & " where kontaktgruppe=2 "
+  IF combobox1.Text = "alle" THEN query = base_query
+
+  res = kunden.sql_query(query)
+
+  FOR EACH res
+    ColumnView1.Add(i, res!kd_nr)
+    Columnview1[i][1] = res!kd_name
+    Columnview1[i][2] = res!kd_name_zusatz
+    Columnview1[i][3] = res!kd_strasse & " " & res!kd_hausnr
+    Columnview1[i][4] = res!kd_telefon
+    i = i + 1
+  NEXT
+ColumnView1_Click()
+END
+
+PUBLIC SUB Button1_Click()
+  ME.Close
+  hauptfenster.activate_menu("kunden")
+END
+
+PUBLIC SUB ColumnView1_Click()
+  DIM res AS Result
+
+IF combobox1.text = "alle" THEN
+  res = kunden.sql_query(query & " where kd_nr=" & ColumnView1[columnview1.key][0])
+ELSE
+  res = kunden.sql_query(query & " and kd_nr=" & ColumnView1[columnview1.key][0])
+END IF
+' Füllen der Adressdaten
+textbox2.Text = res!kd_name & " " & res!kd_name_zusatz 'name
+textbox21.Text = res!kd_name 'name
+textbox22.Text = res!kd_name_zusatz 'zusatz
+textbox16.Text = res!kd_branche 'branche
+textbox23.Text = res!kd_strasse 'strasse
+textbox26.Text = res!kd_hausnr
+TextBox24.Text = res!kd_plz
+textbox25.Text = res!kd_ort
+textbox19.Text = res!kd_vorwahl
+textbox20.Text = res!kd_telefon
+textbox3.Text = res!kd_fax
+textbox17.Text = res!kd_mail
+textbox18.Text = res!kd_homepage
+kunde = res!kd_nr
+'Ende: Füllen der Adressdaten
+
+'Füllen der Ansprechpartner
+ansprechpartner_fill(ColumnView1[columnview1.key][0])
+'Ende: Füllen der Ansprechpartner
+'Leeren der Ansprechpartnerdetails für den Fall eines Kundenwechsels zu einem Kunden ohne AP
+textbox5.Text = ""
+textbox4.Text = ""
+textbox28.Text = ""
+textbox6.Text = ""
+textbox7.Text = ""
+textbox29.Text = ""
+textbox32.Text = ""
+textbox33.Text = ""
+textbox8.Text = ""
+
+textbox35.Text = ""
+textbox36.Text = ""
+textbox37.Text = ""
+textarea1.Text = ""
+columnview2_click
+END
+
+PUBLIC SUB kd_notiz(nummer AS Integer, gespr_partner AS String, notiz AS String)
+  DIM sql_insert AS Result
+  sql_insert = notizen.sql_query("insert into tab_kd_notizen (kd_nr,gespr_partner,notiz,datum,time) values (" & nummer & ",\"" & gespr_partner & "\",\"" & notiz & "\",CURRENT_DATE,CURRENT_TIME)")
+END
+
+PUBLIC SUB ColumnView1_KeyRelease() 'Refresht den Inhalt der Felder nach einem Browsen der Tabelle mit der Tastatur
+  columnView1_click
+END
+
+PUBLIC SUB Button3_Click()
+  kdnew.Show()
+END
+
+PUBLIC SUB ColumnView1_KeyPress()
+  DIM taste AS String
+  taste = key.Code
+IF taste = 4100 THEN
+'   kdview.Show()
+END IF
+END
+
+PRIVATE SUB ansprechpartner_fill(kdnr AS Integer) 'Füllen des Columnview welches die Ansprechpartnerliste enthält.
+  DIM i AS Integer
+  DIM j AS Integer
+  DIM res AS Result
+  DIM nres AS Result
+
+res = ansprechpartner.sql_query("select * from kd_ansprechpartner where kdnr=" & kdnr)
+ columnview2.Clear
+  Columnview2.Columns.Count = 6
+  Columnview2.Columns[0].Text = "ID"
+ Columnview2.Columns[0].width = 55
+ Columnview2.Columns[1].Text = "Titel"
+ Columnview2.Columns[2].Text = "Vorname"
+ Columnview2.Columns[3].Text = "Name"
+ Columnview2.Columns[4].Text = "Telefon"
+ Columnview2.Columns[5].Text = "Position"
+ i = 0
+ FOR EACH res
+    ColumnView2.Add(i, res!ID)
+    Columnview2[i][1] = res!titel
+    Columnview2[i][2] = res!vorname
+    Columnview2[i][3] = res!name
+    Columnview2[i][4] = res!telefon
+    Columnview2[i][5] = res!position
+    i = i + 1
+ NEXT
+'******************************************** Telefonate füllen
+nres = notizen.sql_query("select * from tab_kd_notizen where kd_nr=" & kdnr)
+ columnview3.Clear
+ Columnview3.Columns.Count = 5
+ Columnview3.Columns[0].Text = "ID"
+ Columnview3.Columns[0].width = 55
+ Columnview3.Columns[1].Text = "Datum"
+ Columnview3.Columns[2].Text = "Uhrzeit"
+ Columnview3.Columns[3].Text = "Gespr.-Partner"
+ Columnview3.Columns[4].Text = "Inhalt"
+ j = 0
+ FOR EACH nres
+    ColumnView3.Add(j, nres!notiz_id)
+    Columnview3[j][1] = nres!datum
+    Columnview3[j][2] = nres!time
+    Columnview3[j][3] = nres!gespr_partner
+    Columnview3[j][4] = nres!notiz
+    j = j + 1
+ NEXT
+'******************************************** Telefonate füllen ENDE
+
+
+END
+
+PUBLIC SUB Button8_Click() ' Speichern der Adressdaten
+DIM res AS Result
+DIM kdnr AS Integer
+kdnr = kunde
+kunden.sql_query("update tab_kunden set kd_name=\"" & textbox21.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_name_zusatz=\"" & textbox22.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_strasse=\"" & textbox23.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_hausnr=\"" & textbox26.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_plz=\"" & textbox24.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_ort=\"" & textbox25.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_vorwahl=\"" & textbox19.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_telefon=\"" & textbox20.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_fax=\"" & textbox3.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_mail=\"" & textbox17.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_homepage=\"" & textbox18.Text & "\" where kd_nr=" & kdnr)
+kunden.sql_query("update tab_kunden set kd_branche=\"" & textbox16.Text & "\" where kd_nr=" & kdnr)
+ColumnView1_Click()
+'form_open <- deaktiviert weil sonst der Fokus des Columnview 1 verloren geht...
+END
+
+PUBLIC SUB ColumnView2_Click() ' Füllen der Textboxen des angeklicken Ansprechpartners.
+ DIM res AS Result
+ DIM kdnr AS Integer
+ kdnr = kunde
+ res = ansprechpartner.sql_query("select count(id) as anzahl from kd_ansprechpartner where kdnr=" & kdnr)
+IF res!anzahl > 0 THEN
+'message(res!anzahl)
+res = ansprechpartner.sql_query("select * from kd_ansprechpartner where id=" & ColumnView2[columnview2.key][0])
+textbox5.Text = res!titel
+textbox4.Text = res!vorname
+textbox28.Text = res!name
+textbox6.Text = res!position
+textbox7.Text = res!abteilung
+textbox29.Text = res!telefon
+textbox32.Text = res!mobil
+textbox33.Text = res!mail
+textbox8.Text = res!kommentar
+END IF
+END
+
+PUBLIC SUB Button7_Click() ' Speichern der Ansprechpartner-Details
+DIM res AS Result
+DIM id AS Integer
+DIM kdnr AS Integer
+
+kdnr = kunde
+res = ansprechpartner.sql_query("select count(kdnr) as anzahl from kd_ansprechpartner where kdnr=" & kdnr)
+IF res!anzahl > 0 THEN
+  id = ColumnView2[columnview2.key][0]
+  ansprechpartner.sql_query("update kd_ansprechpartner set titel=\"" & textbox5.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set vorname=\"" & textbox4.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set name=\"" & textbox28.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set position=\"" & textbox6.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set abteilung=\"" & textbox7.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set telefon=\"" & textbox29.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set mobil=\"" & textbox32.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set mail=\"" & textbox33.Text & "\" where id=" & id)
+  ansprechpartner.sql_query("update kd_ansprechpartner set kommentar=\"" & textbox8.Text & "\" where id=" & id)
+  ColumnView2_Click()
+END IF
+END
+
+PUBLIC SUB Button2_Click()
+kd_notiz_neu.Show
+END
+
+PUBLIC SUB Button9_Click()
+kd_ap_neu.Show
+END
+
+PUBLIC SUB ColumnView3_Click()
+  DIM xres AS Result
+  xres = notizen.sql_query("select count(notiz_id) as anzahl from tab_kd_notizen where kd_nr=" & kunde)
+  IF xres!anzahl > 0 THEN
+    xres = notizen.sql_query("select * from tab_kd_notizen where notiz_id=" & ColumnView3[columnview3.key][0])
+    textbox35.Text = xres!datum
+    textbox36.Text = xres!time
+    textbox37.Text = xres!gespr_partner
+    textarea1.Text = xres!notiz
+END IF
+END
+
+PUBLIC SUB ComboBox1_Click()
+  grid_fill()
+END
