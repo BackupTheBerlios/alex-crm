@@ -1,0 +1,16 @@
+# Gambas Project File 1.0
+Project=wws.gambas
+Title=wws
+Startup=Hauptfenster
+TabSize=2
+Version=0.0.23
+Library=gb.db
+Library=gb.qt
+SnapToGrid=1
+ShowGrid=1
+Snap=8
+Localize=1
+KeepDebugInfo=0
+ControlPublic=0
+ExecPath=/home/alex/wws.gambas/wws.gambas
+Prefix=0
