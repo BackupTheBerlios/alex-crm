@@ -1,0 +1,52 @@
+PRIVATE kdnr AS Integer
+PRIVATE res AS Integer
+PRIVATE conn AS NEW Connection
+PRIVATE notiz_handle AS result
+PRIVATE sql_handle AS Result
+
+PUBLIC SUB Form_Open()
+END
+
+PUBLIC SUB Button1_Click()
+ ME.Close
+' kundenliste.Show
+END
+
+PUBLIC SUB Button3_Click()
+  ME.close
+END
+
+PUBLIC SUB speichere_kunde()
+  DIM res AS result
+  DIM maxkey AS Result
+  DIM kd AS Integer
+
+  maxkey = main.sql_query("select max(kd_nr) as maxkunde from tab_kunden")
+  kd = maxkey!maxkunde + 1
+  IF NOT (textbox6.Text = "") THEN
+  message(kd)
+  res = main.sql_query("insert into tab_kunden (kd_nr, kd_name) values(" & kd & ", \"" & textbox6.text & "\")")
+  res = main.sql_query("update tab_kunden set kd_name_zusatz =\"" & textbox7.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_strasse =\"" & textbox8.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_hausnr =\"" & textbox9.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_ort =\"" & textbox10.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_plz =\"" & textbox11.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_vorwahl =\"" & textbox12.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_telefon =\"" & textbox13.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_mail =\"" & textbox14.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_homepage =\"" & textbox15.text & "\" where kd_nr=" & kd)
+  res = main.sql_query("update tab_kunden set kd_branche =\"" & textbox16.text & "\" where kd_nr=" & kd)
+  IF combobox1.Text = "Kunde" THEN res = main.sql_query("update tab_kunden set kontaktgruppe =\"" & 1 & "\" where kd_nr=" & kd)
+  IF combobox1.Text = "Lieferant" THEN res = main.sql_query("update tab_kunden set kontaktgruppe =\"" & 2 & "\" where kd_nr=" & kd)
+'  kundenliste.form_open
+  kundenliste.columnview1_click
+  me.Close
+'  kundenliste.Show
+  ELSE
+  message("Firmenname darf nicht leer sein")
+  END IF
+END
+
+PUBLIC SUB Button2_Click()
+speichere_kunde()
+END

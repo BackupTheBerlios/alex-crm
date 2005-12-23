@@ -1,0 +1,64 @@
+PRIVATE conn AS NEW Connection
+PRIVATE kdnr AS Integer
+PRIVATE res AS Integer
+PRIVATE notiz_handle AS result
+PRIVATE sql_handle AS Result
+firma AS NEW Main
+
+PUBLIC SUB Form_Open()
+  res = akquiseliste.ak_nr
+  kdnr = res
+  sql_handle = firma.sql_query("select * from tab_akquise where ak_nr=" & kdnr)
+  notiz_handle = firma.sql_query("select * from tab_ak_notizen where ak_nr=" & kdnr & " order by ak_nr ")
+  textbox1.text = sql_handle!ak_name & " " & sql_handle!ak_namenszusatz
+  xgrid_fill(notiz_handle)
+END
+
+PUBLIC SUB Button1_Click()
+  ME.Close
+  akquiseliste.Show
+END
+
+PRIVATE SUB xgrid_fill(res AS result)
+  DIM i AS Integer
+  Columnview1.Columns.Count = 5
+  Columnview1.Columns[0].Text = "Datum"
+  Columnview1.Columns[0].width = 70
+  Columnview1.Columns[1].Text = "Uhrzeit"
+  Columnview1.Columns[1].width = 65
+  Columnview1.Columns[2].Text = "Gesprächspartner"
+  Columnview1.Columns[2].width = 130
+  Columnview1.Columns[3].Text = "Inhalt"
+  Columnview1.Columns[3].width = 450
+  Columnview1.Columns[4].Text = "Lfd.Nr."
+  i = 0
+  FOR EACH res
+    ColumnView1.Add(i, res!ak_nr)
+    Columnview1[i][0] = res!datum
+    Columnview1[i][1] = res!time
+    Columnview1[i][2] = res!gespr_partner
+    Columnview1[i][3] = res!notiz
+    Columnview1[i][4] = res!notiz_id
+    i = i + 1
+  NEXT
+END
+
+PUBLIC SUB ColumnView1_Click()
+  DIM erg AS String
+  DIM res AS result
+  DIM ak_nr AS Integer
+  res = firma.sql_query("select * from tab_ak_notizen where notiz_id=" & ColumnView1[columnview1.key][4])
+  textbox2.Text = res!datum
+  textbox3.Text = res!time
+  textbox4.Text = res!gespr_partner
+  textarea1.Text = res!notiz
+  ak_nr = akquiseliste.ak_nr
+  res = firma.sql_query("select * from tab_akquise where ak_nr=" & ak_nr)
+  erg = res!ak_status
+  textbox5.Text = erg
+END
+
+PUBLIC SUB Button3_Click()
+me.close
+ak_notiz_neu.Show
+END
